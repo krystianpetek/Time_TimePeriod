@@ -1,15 +1,14 @@
 ﻿<Window x:Class="StoperWPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:StoperWPF"
         mc:Ignorable="d"
-        Title="Stoper" Height="300" Width="400" WindowStyle="ThreeDBorderWindow" Background="#252525">
+        Title="Stoper" Height="500" Width="800" WindowStyle="ThreeDBorderWindow" Background="#252525">
 
     <Window.Resources>
 
-        <Style x:Key="labelki" TargetType="Label">
+        <Style x:Key="timeLabel" TargetType="Label">
             <Setter Property="Foreground" Value="White"></Setter>
             <Setter Property="FontFamily" Value="Segoe UI Variable Display Light"></Setter>
             <Setter Property="FontSize" Value="60"></Setter>
@@ -19,25 +18,25 @@
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
         </Style>
 
-        <Style x:Key="buttonki" TargetType="Label">
-            <Setter Property="Background" Value="#1e88e5"></Setter>
+        <Style x:Key="btnStartResetLabel" TargetType="Label">
             <Setter Property="Foreground" Value="White"></Setter>
-            <Setter Property="Cursor" Value="Hand"></Setter>
-
-            <Setter Property="BorderBrush" Value="#155fa0"></Setter>
-            <Setter Property="BorderThickness" Value="1"></Setter>
-
             <Setter Property="FontFamily" Value="Segoe UI"></Setter>
             <Setter Property="FontSize" Value="15"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
-
-            <Setter Property="Width" Value="80"></Setter>
-            <Setter Property="Height" Value="50"></Setter>
-
             <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        </Style>
+
+        <Style x:Key="btnStartReset" TargetType="Border">
+            <Setter Property="Cursor" Value="Hand"></Setter>
+            <Setter Property="Background" Value="#1e88e5"></Setter>
+            <Setter Property="Width" Value="80"></Setter>
+            <Setter Property="Height" Value="50"></Setter>
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
             <Setter Property="VerticalAlignment" Value="Top"></Setter>
+            <Setter Property="BorderBrush" Value="#155fa0"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="CornerRadius" Value="10"></Setter>
         </Style>
 
         <!--<Style x:Key="TransparentStyle" TargetType="{x:Type Button}">
@@ -64,66 +63,107 @@
         </Style>-->
     </Window.Resources>
 
-    <Grid MaxHeight="300" MaxWidth="500" MinHeight="200" MinWidth="350">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel x:Name="stackNavbar" Width="60"
+                    Grid.Column="0"
+                    HorizontalAlignment="Left">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="5*"></RowDefinition>
-            <RowDefinition Height="4*"></RowDefinition>
-        </Grid.RowDefinitions>
+            <Border x:Name="borderBtnNavbar" Grid.Column="2"
+                    Style="{StaticResource btnStartReset}"
+                    Width="40" Height="40" 
+                    Margin="10,15,0,0" 
+                    CornerRadius="3" 
+                    HorizontalAlignment="left"
+                    Background="#303030">
+                <Label x:Name="btnNavbar"
+                       Style="{StaticResource btnStartResetLabel}"
+                       MouseDown="btnNavBar_MouseDown"
+                       Content=""/>
+            </Border>
+        </StackPanel>
+        <Border Grid.Column="1" Background="#1e88e5" Width="0.5"></Border>
+        <Grid Grid.Column="0" Grid.ColumnSpan="3" MaxHeight="300" MaxWidth="500" MinHeight="200" MinWidth="350">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"></RowDefinition>
+                <RowDefinition Height="4*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="30" Width="auto"></ColumnDefinition>
+                    <ColumnDefinition ></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition MinWidth="30" Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition MinWidth="30" Width="auto"></ColumnDefinition>
-                <ColumnDefinition ></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition MinWidth="30" Width="auto"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+                <Label x:Name="minutaLabel"
+                       Style="{StaticResource timeLabel}"
+                       Grid.Column="1"
+                       MouseEnter="minutaLabel_MouseEnter"
+                       MouseLeave="minutaLabel_MouseLeave" />
 
-            <Label x:Name="minutaLabel" Style="{StaticResource labelki}"
-                   Grid.Column="1" MouseEnter="minutaLabel_MouseEnter" MouseLeave="minutaLabel_MouseLeave" />
+                <Label x:Name="dwukropek1"
+                       Style="{StaticResource timeLabel}"
+                       Grid.Column="2"
+                       Content=":"/>
 
-            <Label x:Name="dwukropek1" Style="{StaticResource labelki}"
-                   Grid.Column="2"
-                   Content=":"></Label>
+                <Label x:Name="sekundaLabel"
+                       Style="{StaticResource timeLabel}"
+                       Grid.Column="3"
+                       MouseLeave="sekundaLabel_MouseLeave"
+                       MouseEnter="sekundaLabel_MouseEnter" />
 
-            <Label x:Name="sekundaLabel" Style="{StaticResource labelki}"
-                   Grid.Column="3" MouseLeave="sekundaLabel_MouseLeave" MouseEnter="sekundaLabel_MouseEnter" />
+                <Label x:Name="dwukropek2"
+                       Style="{StaticResource timeLabel}"
+                       Grid.Column="4"
+                       Content=":"/>
 
-            <Label x:Name="dwukropek2" Style="{StaticResource labelki}"
-                   Grid.Column="4"
-                   Content=":"></Label>
+                <Label x:Name="miliSekundaLabel"
+                       Style="{StaticResource timeLabel}"
+                       Grid.Column="5"
+                       MouseLeave="miliSekundaLabel_MouseLeave"
+                       MouseEnter="miliSekundaLabel_MouseEnter" />
+            </Grid>
 
-            <Label x:Name="miliSekundaLabel" Style="{StaticResource labelki}"
-                   Grid.Column="5" MouseLeave="miliSekundaLabel_MouseLeave" MouseEnter="miliSekundaLabel_MouseEnter" />
-        </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+                <Border x:Name="borderBtnStartStop" Grid.Column="1"
+                        Style="{StaticResource btnStartReset}">
+                    <Label
+                        x:Name="btnStartStop"
+                        Style="{StaticResource btnStartResetLabel}"
+                        Content="START"
+                        MouseDown="btnStartStop_MouseDown"
+                        MouseEnter="btnStartStop_MouseEnter"
+                        MouseLeave="btnStartStop_MouseLeave">
+                    </Label>
+                </Border>
 
-            <Label x:Name="btnStartStop"
-                    Style="{StaticResource buttonki}"
-                    Grid.Column="1"
-                    Content="START"
-                    MouseDown="btnStartStop_MouseDown"
-                    MouseEnter="btnStartStop_MouseEnter"
-                    MouseLeave="btnStartStop_MouseLeave" />
-
-            <Label x:Name="btnReset"
-                   Style="{StaticResource buttonki}"
-                   Grid.Column="2"
-                   Content="RESET"
-                   MouseDown="btnReset_MouseDown"
-                   MouseEnter="btnReset_MouseEnter"
-                   MouseLeave="btnReset_MouseLeave">
-            </Label>
+                <Border x:Name="borderBtnReset" Grid.Column="2"
+                        Style="{StaticResource btnStartReset}">
+                    <Label
+                        x:Name="btnReset"
+                        Style="{StaticResource btnStartResetLabel}"
+                        Content="RESET"
+                        MouseDown="btnReset_MouseDown"
+                        MouseEnter="btnReset_MouseEnter"
+                        MouseLeave="btnReset_MouseLeave">
+                    </Label>
+                </Border>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

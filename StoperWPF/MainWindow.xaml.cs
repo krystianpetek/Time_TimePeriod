@@ -14,6 +14,7 @@ namespace StoperWPF
         private static TimePeriod milisekunda = new TimePeriod(0, 0, 1);
         private TimePeriod stoperek = new TimePeriod(0, 0, 0);
         private bool isClicked;
+        private bool isVisibleNavbar = false;
 
         public MainWindow()
         {
@@ -28,6 +29,7 @@ namespace StoperWPF
             minutaLabel.Content = "00";
             sekundaLabel.Content = "00";
             miliSekundaLabel.Content = "00";
+            btnStartStop.Content = "START";
         }
 
         #region LABEL
@@ -88,23 +90,28 @@ namespace StoperWPF
         {
             Color backColor = Color.FromRgb(2, 108, 160);
             SolidColorBrush brush = new SolidColorBrush(backColor);
-            btnReset.Background = brush;
+            borderBtnReset.Background = brush;
         }
 
         private void btnReset_MouseLeave(object sender, MouseEventArgs e)
         {
             Color backColor = Color.FromRgb(30, 136, 229);
             SolidColorBrush brush = new SolidColorBrush(backColor);
-            btnReset.Background = brush;
+            borderBtnReset.Background = brush;
         }
 
         private async void btnStartStop_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (isClicked)
+            {
+                btnStartStop.Content = "START";
                 isClicked = false;
+            }
             else
+            {
+                btnStartStop.Content = "STOP";
                 isClicked = true;
-
+            }
             while (isClicked)
             {
                 stoperek = stoperek + milisekunda;
@@ -119,14 +126,42 @@ namespace StoperWPF
         {
             Color backColor = Color.FromRgb(2, 108, 160);
             SolidColorBrush brush = new SolidColorBrush(backColor);
-            btnStartStop.Background = brush;
+            borderBtnStartStop.Background = brush;
         }
 
         private void btnStartStop_MouseLeave(object sender, MouseEventArgs e)
         {
             Color backColor = Color.FromRgb(30, 136, 229);
             SolidColorBrush brush = new SolidColorBrush(backColor);
-            btnStartStop.Background = brush;
+
+            borderBtnStartStop.Background = brush;
+        }
+
+        private async void btnNavBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            btnNavbar.IsEnabled = false;
+            if (!isVisibleNavbar)
+            {
+                isVisibleNavbar = true;
+                for(int i = 60;i<180;i+=5)
+                {
+                    await Task.Delay(1);
+                    stackNavbar.Width = i;
+
+                }
+                btnNavbar.IsEnabled= true;
+            }
+            else
+            {
+                isVisibleNavbar = false;
+                for (int i = 180; i > 60; i -= 5)
+                {
+                    await Task.Delay(1);
+                    stackNavbar.Width = i;
+
+                }
+                btnNavbar.IsEnabled = true;
+            }
         }
     }
 }
