@@ -4,7 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Stoper" Height="500" Width="800" WindowStyle="ThreeDBorderWindow" Background="#252525">
+        Title="Stoper" Height="500" Width="800" WindowStyle="ThreeDBorderWindow" Background="#252525" Topmost="True">
 
     <Window.Resources>
 
@@ -39,6 +39,17 @@
             <Setter Property="CornerRadius" Value="10"></Setter>
         </Style>
 
+        <Style x:Key="btnNavbar" TargetType="Border">
+            <Setter Property="Cursor" Value="Hand"></Setter>
+            <Setter Property="Background" Value="#1e88e5"></Setter>
+            <Setter Property="Width" Value="40"></Setter>
+            <Setter Property="Height" Value="40"></Setter>
+            <Setter Property="BorderBrush" Value="#155fa0"></Setter>
+            <Setter Property="CornerRadius" Value="15"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Margin" Value="10,15,0,0"></Setter>
+        </Style>
+
         <!--<Style x:Key="TransparentStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -71,23 +82,82 @@
         </Grid.ColumnDefinitions>
         <StackPanel x:Name="stackNavbar" Width="60"
                     Grid.Column="0"
-                    HorizontalAlignment="Left">
+                    HorizontalAlignment="Left"
+                    Background="#252525"  Panel.ZIndex="2" >
 
             <Border x:Name="borderBtnNavbar" Grid.Column="2"
-                    Style="{StaticResource btnStartReset}"
-                    Width="40" Height="40" 
-                    Margin="10,15,0,0" 
-                    CornerRadius="3" 
-                    HorizontalAlignment="left"
-                    Background="#303030">
+                    Style="{StaticResource btnNavbar}">
                 <Label x:Name="btnNavbar"
-                       Style="{StaticResource btnStartResetLabel}"
                        MouseDown="btnNavBar_MouseDown"
-                       Content=""/>
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center">
+                    <Image x:Name="imageNav" Source="Image\menu.png" Width="22"/>
+                </Label>
             </Border>
+
+            <Label MouseEnter="btnClock_MouseEnter"
+                   MouseLeave="btnClock_MouseLeave"
+                   x:Name="btnClock" 
+                   Margin="0,7.5,0,0" 
+                   HorizontalAlignment="Center"
+                   Cursor="Hand">
+                <Grid Margin="0,7.5,0,7.5" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"></ColumnDefinition>
+                        <ColumnDefinition Width="6.5"></ColumnDefinition>
+                        <ColumnDefinition Width="113.5"/>
+                    </Grid.ColumnDefinitions>
+                    <Image 
+                    Width="40"
+                    Height="40"
+                    Source="Image\clock.png" Margin="5,0,5,0"/>
+
+                    <Label Grid.Column="2" x:Name="labelClockVisible" 
+                           Foreground="white" 
+                           FontFamily="Seoge UI" 
+                           FontSize="25" 
+                           HorizontalAlignment="Center"
+                           HorizontalContentAlignment="Center"
+                           VerticalAlignment="Center"
+                           VerticalContentAlignment="Center"
+                           Content="CLOCK"/>
+                </Grid>
+            </Label>
+
+            <Label x:Name="btnStoper"
+                   MouseEnter="btnStoper_MouseEnter"
+                   MouseLeave="btnStoper_MouseLeave" 
+                   Margin="0,7.5,0,0" 
+                   HorizontalAlignment="Center"
+                   Cursor="Hand">
+                <Grid Margin="0,7.5,0,7.5" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"></ColumnDefinition>
+                        <ColumnDefinition Width="120"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image 
+                    Width="50"
+                    Height="50"
+                    Source="Image\stoper.png"/>
+
+                    <Label Grid.Column="2" x:Name="labelStoperVisible" 
+                           Foreground="white" 
+                           FontFamily="Seoge UI" 
+                           FontSize="25" 
+                           HorizontalAlignment="Center"
+                           HorizontalContentAlignment="Center"
+                           VerticalAlignment="Center"
+                           VerticalContentAlignment="Center"
+                           Margin="10,0,0,0"
+                           Content="STOPER">
+
+                    </Label>
+                </Grid>
+            </Label>
+
         </StackPanel>
-        <Border Grid.Column="1" Background="#1e88e5" Width="0.5"></Border>
-        <Grid Grid.Column="0" Grid.ColumnSpan="3" MaxHeight="300" MaxWidth="500" MinHeight="200" MinWidth="350">
+        <Border x:Name="belkaNavBar" Grid.Column="1" Background="#1e88e5" Width="1"></Border>
+        <Grid Grid.Column="0" Grid.ColumnSpan="3" MaxHeight="300" MaxWidth="500" MinHeight="200" MinWidth="480">
             <Grid.RowDefinitions>
                 <RowDefinition Height="5*"></RowDefinition>
                 <RowDefinition Height="4*"></RowDefinition>
@@ -112,7 +182,7 @@
                 <Label x:Name="dwukropek1"
                        Style="{StaticResource timeLabel}"
                        Grid.Column="2"
-                       Content=":"/>
+                       Content=":" />
 
                 <Label x:Name="sekundaLabel"
                        Style="{StaticResource timeLabel}"
@@ -123,7 +193,7 @@
                 <Label x:Name="dwukropek2"
                        Style="{StaticResource timeLabel}"
                        Grid.Column="4"
-                       Content=":"/>
+                       Content=":" />
 
                 <Label x:Name="miliSekundaLabel"
                        Style="{StaticResource timeLabel}"
