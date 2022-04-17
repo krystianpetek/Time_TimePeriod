@@ -2,7 +2,7 @@
 using System;
 using Time_TimePeriod;
 
-namespace TimeTests.TimeTests
+namespace TimeTests
 {
     [TestClass]
     public class TimeEqualsTests

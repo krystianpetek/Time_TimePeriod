@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace StoperWPF
+namespace Stoper_Zegar_WPF
 {
     /// <summary>
     /// Interaction logic for App.xaml

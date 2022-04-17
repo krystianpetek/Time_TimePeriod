@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Time_TimePeriod;
 
-namespace TimeTests.TimePeriodTests
+namespace TimePeriodTests
 {
     [TestClass]
     public class TimePeriodOperatorsTests
@@ -134,7 +134,7 @@ namespace TimeTests.TimePeriodTests
         {
             TimePeriod t1 = new TimePeriod(t1Hours, t1Minutes, t1Seconds);
             TimePeriod t2 = new TimePeriod(t2Hours, t2Minutes, t2Seconds);
-            Assert.IsTrue((t1 + new TimePeriod(timePeriodInSeconds)) == t2);
+            Assert.IsTrue(t1 + new TimePeriod(timePeriodInSeconds) == t2);
         }
 
         [DataTestMethod, TestCategory("Operators")]

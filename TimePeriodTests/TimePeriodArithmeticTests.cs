@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Time_TimePeriod;
 
-namespace TimeTests.TimePeriodTests
+namespace TimePeriodTests
 {
     [TestClass]
     public class TimePeriodArithmeticTests
@@ -17,7 +17,7 @@ namespace TimeTests.TimePeriodTests
         {
             TimePeriod tp1 = new TimePeriod(tp1NumOfSeconds);
             TimePeriod tp2 = new TimePeriod(tp2NumOfSeconds);
-            Assert.IsTrue((tp1.Plus(tp2)).NumberOfSeconds == sumOfAddedTimePeriods);
+            Assert.IsTrue(tp1.Plus(tp2).NumberOfSeconds == sumOfAddedTimePeriods);
         }
 
         [DataTestMethod, TestCategory("Arithmetic")]
@@ -31,7 +31,7 @@ namespace TimeTests.TimePeriodTests
         {
             TimePeriod tp1 = new TimePeriod(tp1NumOfSeconds);
             TimePeriod tp2 = new TimePeriod(tp2NumOfSeconds);
-            Assert.IsTrue((TimePeriod.Plus(tp1, tp2)).NumberOfSeconds == sumOfAddedTimePeriods);
+            Assert.IsTrue(TimePeriod.Plus(tp1, tp2).NumberOfSeconds == sumOfAddedTimePeriods);
         }
 
         [DataTestMethod, TestCategory("Operators")]
@@ -46,7 +46,7 @@ namespace TimeTests.TimePeriodTests
         {
             TimePeriod tp1 = new TimePeriod(tp1NumOfSeconds);
             TimePeriod tp2 = new TimePeriod(tp2NumOfSeconds);
-            Assert.IsTrue((tp1.Minus(tp2)).NumberOfSeconds == sumOfAddedTimePeriods);
+            Assert.IsTrue(tp1.Minus(tp2).NumberOfSeconds == sumOfAddedTimePeriods);
         }
 
         [DataTestMethod, TestCategory("Operators")]
@@ -61,7 +61,7 @@ namespace TimeTests.TimePeriodTests
         {
             TimePeriod tp1 = new TimePeriod(tp1NumOfSeconds);
             TimePeriod tp2 = new TimePeriod(tp2NumOfSeconds);
-            Assert.IsTrue((TimePeriod.Minus(tp1, tp2)).NumberOfSeconds == sumOfAddedTimePeriods);
+            Assert.IsTrue(TimePeriod.Minus(tp1, tp2).NumberOfSeconds == sumOfAddedTimePeriods);
         }
     }
 }
